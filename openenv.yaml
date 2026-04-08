@@ -1,0 +1,15 @@
+name: "sql-review-env"
+version: "1.0.0"
+description: "AI-driven SQL auditor for syntax, performance, and security logic."
+tags: ["sql", "devops", "security"]
+entrypoint: "python server/app.py"
+tasks:
+  - id: "fix_syntax"
+    difficulty: "easy"
+    description: "Fix a query with missing commas and incorrect keywords."
+  - id: "optimize_query"
+    difficulty: "medium"
+    description: "Convert a SELECT * query on a large table into an optimized, filtered query."
+  - id: "security_audit"
+    difficulty: "hard"
+    description: "Sanitize a query vulnerable to SQL injection using parameterized inputs."
