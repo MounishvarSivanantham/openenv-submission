@@ -53,7 +53,12 @@ def step(action: SQLAction):
 
 
 def main():
-    port = int(os.getenv("PORT", "7860"))
+    # HF Spaces sets PORT, but guard against empty/non-integer values.
+    port_raw = os.getenv("PORT", "7860")
+    try:
+        port = int(port_raw)
+    except (TypeError, ValueError):
+        port = 7860
     uvicorn.run(app, host="0.0.0.0", port=port)
 
 
