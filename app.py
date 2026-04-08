@@ -26,23 +26,23 @@ def get_state():
 @app.post("/step")
 def step(action: SQLAction):
     task_id = TASK_LIST[STATE["task_index"]]
-    reward = 0.0
+    reward = 0.1
     done = False
 
     # Grading Logic (As per architecture: Syntax + Perf + Security)
     if task_id == "fix_syntax":
         if "," in action.query and "TRUE" in action.query.upper():
-            reward = 1.0
+            reward = 0.9
             done = True
     elif task_id == "optimize_query":
         if "SELECT *" not in action.query.upper() and "LIMIT" in action.query.upper():
-            reward = 1.0
+            reward = 0.85
             done = True
         elif "SELECT *" not in action.query.upper():
-            reward = 0.5 # Partial reward
+            reward = 0.6 # Partial reward
     elif task_id == "security_audit":
         if any(c in action.query for c in ["?", "%s", ":"]):
-            reward = 1.0
+            reward = 0.95
             done = True
 
     if done and STATE["task_index"] < 2:
