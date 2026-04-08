@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
@@ -49,5 +51,11 @@ def step(action: SQLAction):
 
     return {"observation": {"feedback": "Processed", "current_task": task_id}, "reward": reward, "done": done}
 
+
+def main():
+    port = int(os.getenv("PORT", "7860"))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    main()
